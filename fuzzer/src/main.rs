@@ -316,6 +316,10 @@ fn main() {
             .expect("Could not create folder in workdir");
     }
 
+    // Create an empty file named "is_main_node" in the workdir: Expected by secondary AFL instances.
+    let empty_file_path = format!("{}/outputs/{}", config.path_to_workdir, "is_main_node");
+    fs::File::create(empty_file_path).expect("Could not create empty file");
+
     //Start fuzzing threads
     let mut thread_number = 0;
     let threads = (0..config.number_of_threads).map(|_| {

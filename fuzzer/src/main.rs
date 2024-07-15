@@ -1,7 +1,6 @@
 // Nautilus
 // Copyright (C) 2024  Daniel Teuchert, Cornelius Aschermann, Sergej Schumilo
 
-#![feature(vec_remove_item)]
 extern crate forksrv;
 extern crate grammartec;
 extern crate serde_json;
@@ -189,6 +188,9 @@ fn fuzzing_thread(
 }
 
 fn main() {
+    
+    pyo3::prepare_freethreaded_python();
+
     //Parse parameters
     let matches = App::new("nautilus")
         .about("Grammar fuzzer")

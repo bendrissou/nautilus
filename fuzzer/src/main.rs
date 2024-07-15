@@ -266,9 +266,11 @@ fn main() {
         );
     }
 
+    let start_time = Instant::now();
     let shared = Arc::new(Mutex::new(GlobalSharedState::new(
         config.path_to_workdir.clone(),
         config.bitmap_size,
+        start_time,
     )));
     let shared_chunkstore = Arc::new(ChunkStoreWrapper::new(config.path_to_workdir.clone()));
 
@@ -335,7 +337,6 @@ fn main() {
         thread::Builder::new()
             .name("status_thread".to_string())
             .spawn(move || {
-                let start_time = Instant::now();
                 thread::sleep(time::Duration::from_secs(1));
                 print!("{}[2J", 27 as char);
                 print!("{}[H", 27 as char);

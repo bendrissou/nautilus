@@ -92,11 +92,11 @@ impl FuzzingState {
             self.cks.is_locked.store(false, Ordering::Release);
 
             input.recursions = input.tree.calc_recursions(ctx);
-
+            //let timestamp = start_time.elapsed();
             //Update file corresponding to this entry
             let mut file = File::create(format!(
-                "{}/outputs/queue/id:{:06},er:{:?}.min", //TODO FIX PATH TO WORKDIR
-                &self.config.path_to_workdir, input.id, input.exitreason
+                "{}/outputs/queue/id:{:06},time:{},er:{:?}.min", //TODO FIX PATH TO WORKDIR
+                &self.config.path_to_workdir, input.id, input.timestamp, input.exitreason
             ))
             .expect("Could not create queue entry, are you sure $workdir/outputs exists?");
             input.tree.unparse_to(&ctx, &mut file);

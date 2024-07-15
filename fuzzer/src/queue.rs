@@ -93,7 +93,7 @@ impl Queue {
 
         //Create File for entry
         let mut file = File::create(format!(
-            "{}/outputs/queue/id:{:09},er:{:?}",
+            "{}/outputs/queue/id:{:06},er:{:?}",
             self.work_dir, self.current_id, exitreason
         ))
         .expect("RAND_259979732");
@@ -161,7 +161,7 @@ impl Queue {
         {
             //If file was created for this entry, delete it.
             match fs::remove_file(format!(
-                "{}/outputs/queue/id:{:09},er:{:?}",
+                "{}/outputs/queue/id:{:06},er:{:?}",
                 self.work_dir, item.id, item.exitreason
             )) {
                 Err(ref err) if err.kind() != ErrorKind::NotFound => {

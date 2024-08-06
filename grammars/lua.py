@@ -103,13 +103,20 @@ ctx.rule(u'UNOP',u'#')
 ctx.rule(u'UNOP',u'~')
 
 ctx.rule(u'TABLECONSTRUCTOR',u'\\{{FIELDLIST}\\}')
+ctx.rule(u'TABLECONSTRUCTOR',u'\\{\\}')
 
-ctx.rule(u'FIELDLIST',u'{FIELD},{FIELDLIST}')
-ctx.rule(u'FIELDLIST',u'{FIELD}')
+ctx.rule(u'FIELDLIST',u'{FIELD}{FIELDSEP}{FIELDLIST}')
+ctx.rule(u'FIELDLIST',u'{FIELD}{FIELDSEPOPT}')
 
 ctx.rule(u'FIELD',u'[{EXPR}]={EXPR}')
 ctx.rule(u'FIELD',u'{IDENTIFIER}={EXPR}')
 ctx.rule(u'FIELD',u'{EXPR}')
+
+ctx.rule(u'FIELDSEP',u',')
+ctx.rule(u'FIELDSEP',u';')
+
+ctx.rule(u'FIELDSEPOPT',u'{FIELDSEP}')
+ctx.rule(u'FIELDSEPOPT',u'')
 
 ctx.rule(u'VARLIST',u'{VAR}, {VARLIST}')
 ctx.rule(u'VARLIST',u'{VAR}')

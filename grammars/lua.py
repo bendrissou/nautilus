@@ -103,7 +103,6 @@ ctx.rule(u'UNOP',u'#')
 ctx.rule(u'UNOP',u'~')
 
 ctx.rule(u'TABLECONSTRUCTOR',u'\\{{FIELDLIST}\\}')
-ctx.rule(u'METATABLE',u'{VAR} = setmetatable({VAR}, {TABLECONSTRUCTOR})')
 
 ctx.rule(u'FIELDLIST',u'{FIELD},{FIELDLIST}')
 ctx.rule(u'FIELDLIST',u'{FIELD}')

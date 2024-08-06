@@ -14,12 +14,15 @@ ctx.rule(u'STATEMENT',u'{FUNCTIONCALL}')
 ctx.rule(u'STATEMENT',u'{COROUTINE}')
 ctx.rule(u'STATEMENT',u'{CONDITIONAL}')
 ctx.rule(u'STATEMENT',u'{LOOP}')
-ctx.rule(u'STATEMENT',u'return {EXPRLIST}')
+ctx.rule(u'STATEMENT',u'{RETSTAT}')
 ctx.rule(u'STATEMENT',u'goto {LABELNAME}')
 ctx.rule(u'STATEMENT',u'::{LABELNAME}::')
 
 ctx.rule(u'LABELNAME',u'labela')
 ctx.rule(u'LABELNAME',u'labelb')
+
+ctx.rule(u'RETSTAT',u'return {EXPRLIST}')
+ctx.rule(u'RETSTAT',u'return {EXPRLIST} ;')
 
 ctx.rule(u'FUNCTION',u'{FUNCDEF} ({FUNCTION_ARGS}) {PROGRAM}\nend')
 

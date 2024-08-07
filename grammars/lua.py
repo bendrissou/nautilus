@@ -46,7 +46,11 @@ ctx.rule(u'ARGS',u'{TABLECONSTRUCTOR}')
 ctx.rule(u'ARGS',u'{LITERALSTRING}')
 
 ctx.rule(u'CONDITIONAL',u'if {EXPR} then\n{PROGRAM}\nend')
-ctx.rule(u'CONDITIONAL',u'if {EXPR} then\n{PROGRAM}\nelse\n{PROGRAM}\nend')
+ctx.rule(u'CONDITIONAL',u'if {EXPR} then\n{PROGRAM}{ELSEIF}\nelse\n{PROGRAM}\nend')
+ctx.rule(u'CONDITIONAL',u'if {EXPR} then\n{PROGRAM}{ELSEIF}\nend')
+
+ctx.rule(u'ELSEIF',u'\nelseif\n{EXPR} then\n{PROGRAM}{ELSEIF}')
+ctx.rule(u'ELSEIF',u'')
 
 ctx.rule(u'LOOP',u'while {EXPR}\ndo\n{PROGRAM}\nend')
 ctx.rule(u'LOOP',u'for {NAME}={EXPR}, {EXPR}, {EXPR}\ndo\n{PROGRAM}\nend')

@@ -37,7 +37,6 @@ ctx.rule(u'FUNCTION_ARGLIST',u'...')
 
 ctx.rule(u'FUNCTIONCALL',u'{PREFIX_EXPR} {ARGS}')
 ctx.rule(u'FUNCTIONCALL',u'{PREFIX_EXPR}:{NAME} {ARGS}')
-ctx.rule(u'FUNCTIONCALL',u'{PREFIX_EXPR}.{NAME} {ARGS}')
 
 ctx.rule(u'ARGS',u'({EXPRLIST})')
 ctx.rule(u'ARGS',u'{TABLECONSTRUCTOR}')
@@ -63,8 +62,8 @@ ctx.rule(u'EXPR',u'({NAME}[{EXPR}])')
 ctx.rule(u'EXPR',u'({EXPR}{BINOP}{EXPR})')
 ctx.rule(u'EXPR',u'({UNOP}{EXPR})')
 ctx.rule(u'EXPR',u'{LAMBDA}')
-ctx.rule(u'EXPR',u'{NAME}')
 ctx.rule(u'EXPR',u'{FUNCTIONCALL}')
+ctx.rule(u'EXPR',u'{PREFIX_EXPR}')
 ctx.rule(u'EXPR',u'...')
 
 ctx.rule(u'PREFIX_EXPR',u'{NAME}')

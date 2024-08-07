@@ -53,7 +53,8 @@ ctx.rule(u'ELSEIF',u'\nelseif\n{EXPR} then\n{PROGRAM}{ELSEIF}')
 ctx.rule(u'ELSEIF',u'')
 
 ctx.rule(u'LOOP',u'while {EXPR}\ndo\n{PROGRAM}\nend')
-ctx.rule(u'LOOP',u'for {NAME}={EXPR}, {EXPR}, {EXPR}\ndo\n{PROGRAM}\nend')
+ctx.rule(u'LOOP',u'for {NAME}={EXPR}, {EXPRLIST}\ndo\n{PROGRAM}\nend')
+ctx.rule(u'LOOP',u'for {NAMELIST}={EXPRLIST}\ndo\n{PROGRAM}\nend')
 ctx.rule(u'LOOP',u'repeat\n{PROGRAM}\nuntil {EXPR}')
 
 ctx.rule(u'EXPRLIST',u'{EXPR}, {EXPRLIST}')

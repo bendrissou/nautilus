@@ -1,10 +1,11 @@
 ctx.rule(u'START',u'{PROGRAM}')
 
-ctx.rule(u'PROGRAM',u'{STATEMENT}\n{PROGRAM}')
-ctx.rule(u'PROGRAM',u'')
+ctx.rule(u'PROGRAM',u'{STATEMENTLIST}{RETSTAT}')
+
+ctx.rule(u'STATEMENTLIST',u'{STATEMENT}\n{PROGRAM}')
+ctx.rule(u'STATEMENTLIST',u'')
 
 ctx.rule(u'STATEMENT',u';')
-ctx.rule(u'STATEMENT',u'')
 ctx.rule(u'STATEMENT',u'break')
 ctx.rule(u'STATEMENT',u'{NAMELIST} = {EXPRLIST}')
 ctx.rule(u'STATEMENT',u'local {ATTRLIST} = {EXPRLIST}')
@@ -13,12 +14,14 @@ ctx.rule(u'STATEMENT',u'{FUNCTION}')
 ctx.rule(u'STATEMENT',u'{FUNCTIONCALL}')
 ctx.rule(u'STATEMENT',u'{CONDITIONAL}')
 ctx.rule(u'STATEMENT',u'{LOOP}')
-ctx.rule(u'STATEMENT',u'{RETSTAT}')
 ctx.rule(u'STATEMENT',u'goto {NAME}')
 ctx.rule(u'STATEMENT',u'::{NAME}::')
 
+ctx.rule(u'RETSTAT',u'return ')
+ctx.rule(u'RETSTAT',u'return ;')
 ctx.rule(u'RETSTAT',u'return {EXPRLIST}')
 ctx.rule(u'RETSTAT',u'return {EXPRLIST} ;')
+ctx.rule(u'RETSTAT',u'')
 
 ctx.rule(u'FUNCTION',u'{FUNCDEF} ({FUNCTION_ARGS}) {PROGRAM}\nend')
 

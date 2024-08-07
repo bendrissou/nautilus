@@ -2,7 +2,7 @@ ctx.rule(u'START',u'{PROGRAM}')
 
 ctx.rule(u'PROGRAM',u'{STATEMENTLIST}{RETSTAT}')
 
-ctx.rule(u'STATEMENTLIST',u'{STATEMENT}\n{PROGRAM}')
+ctx.rule(u'STATEMENTLIST',u'{STATEMENT}\n{STATEMENTLIST}')
 ctx.rule(u'STATEMENTLIST',u'')
 
 ctx.rule(u'STATEMENT',u';')

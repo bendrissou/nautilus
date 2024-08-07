@@ -119,8 +119,11 @@ ctx.rule(u'FIELDSEPOPT',u'')
 ctx.rule(u'NAMELIST',u'{NAME}, {NAMELIST}')
 ctx.rule(u'NAMELIST',u'{NAME}')
 
-ctx.rule(u'NAME',u'{LETTER}{NAME}')
+ctx.rule(u'NAME',u'{NAME}{CHAR}')
 ctx.rule(u'NAME',u'{LETTER}')
+
+ctx.rule(u'CHAR',u'{LETTER}')
+ctx.rule(u'CHAR',u'{DECIMALDIGIT}')
 
 ctx.rule(u'ATTRLIST',u'{NAME}{ATTR},{NAMELIST}')
 ctx.rule(u'ATTRLIST',u'{NAME}{ATTR}')

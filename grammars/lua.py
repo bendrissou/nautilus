@@ -161,7 +161,7 @@ ctx.rule(u'ESCAPESEQUENCE',u'\\v')
 ctx.rule(u'ESCAPESEQUENCE',u'\\z')
 ctx.rule(u'ESCAPESEQUENCE',u'\n')
 ctx.rule(u'ESCAPESEQUENCE',u'\\x{HEXDIGIT}{HEXDIGIT}')
-ctx.rule(u'ESCAPESEQUENCE',u'\\u\\{{HEXADECIMAL}\\}')
+ctx.rule(u'ESCAPESEQUENCE',u'\\u\\{{HEXDIGITS}\\}')
 
 ctx.rule(u'EXPONENT',u'e')
 ctx.rule(u'EXPONENT',u'E')

@@ -20,7 +20,7 @@ ctx.rule(u'STATEMENT',u'::{NAME}::')
 ctx.rule(u'RETSTAT',u'return ')
 ctx.rule(u'RETSTAT',u'return ;')
 ctx.rule(u'RETSTAT',u'return {EXPRLIST}')
-ctx.rule(u'RETSTAT',u'return {EXPRLIST} ;')
+ctx.rule(u'RETSTAT',u'return {EXPRLIST};')
 ctx.rule(u'RETSTAT',u'')
 
 ctx.rule(u'FUNCTION',u'{FUNCDEF} ({FUNCTION_ARGS}) {PROGRAM}\nend')

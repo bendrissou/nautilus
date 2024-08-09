@@ -124,7 +124,7 @@ ctx.rule(u'NAMELIST',u'{NAME}, {NAMELIST}')
 ctx.rule(u'NAMELIST',u'{NAME}')
 
 ctx.rule(u'NAME',u'{NAME}{CHAR}')
-ctx.rule(u'NAME',u'{LETTER}')
+ctx.rule(u'NAME',u'var_{LETTER}')
 
 ctx.rule(u'CHAR',u'{LETTER}')
 ctx.rule(u'CHAR',u'{DECIMALDIGIT}')

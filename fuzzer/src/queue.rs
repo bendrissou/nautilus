@@ -167,15 +167,6 @@ impl Queue {
             .all(|(i, elem)| (*elem == 0) || self.bit_to_inputs.contains_key(&i))
         {
             //If file was created for this entry, delete it.
-            match fs::remove_file(format!(
-                "{}/outputs/queue/id:{:06},time:{},er:{:?}",
-                self.work_dir, item.id, item.timestamp, item.exitreason
-            )) {
-                Err(ref err) if err.kind() != ErrorKind::NotFound => {
-                    println!("Error while deleting file: {}", err);
-                }
-                _ => {}
-            }
             return;
         }
 

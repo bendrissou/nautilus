@@ -380,6 +380,7 @@ ctx.rule(u'ANONYMOUS_CLASS',u'{T_CLASS} {CTOR_ARGUMENTS} {EXTENDS_FROM} {IMPLEME
 ctx.rule(u'NEW_EXPR',u'new {CLASS_NAME_REFERENCE} {CTOR_ARGUMENTS}')
 ctx.rule(u'NEW_EXPR',u'new {ANONYMOUS_CLASS}')
 
+ctx.rule(u'EXPR',u'{VARIABLE}')
 ctx.rule(u'EXPR',u'list ({ARRAY_PAIR_LIST}) = {EXPR}')
 ctx.rule(u'EXPR',u'[{ARRAY_PAIR_LIST}] = {EXPR}')
 ctx.rule(u'EXPR',u'{VARIABLE} = {EXPR}')

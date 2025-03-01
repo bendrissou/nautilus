@@ -301,7 +301,7 @@ foreach_variable
 
 for_statement
     : statement
-    | ':' inner_statement_list 'endfor;'
+    | ':' inner_statement_list 'endfor' ';'
     ;
 
 foreach_statement
@@ -891,6 +891,7 @@ t_class
 
 t_variable
     : '$' t_string
+    | '$' semi_reserved
     ;
 
 LNUMBER

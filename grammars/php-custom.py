@@ -1,7 +1,7 @@
 ctx.rule(u'START',u'<?php\n$a = NULL;\n$b = NULL;\n$c = NULL;\n$d = NULL;\nsrand(1337);\n{PROGRAM}?>')
 ctx.rule(u'PROGRAM',u'{STATEMENT};\n{PROGRAM}')
 ctx.rule(u'PROGRAM',u'')
-ctx.rule(u'STATEMENT',u'function {FUNCTION}({ARGS})\n{PROGRAM}}')
+ctx.rule(u'STATEMENT',u'function {FUNCTION}({ARGS})\n{PROGRAM}')
 ctx.rule(u'STATEMENT',u'{VAR} = {FUNCTION}({ARGS})')
 ctx.rule(u'STATEMENT',u'{VAR} = {VAR}->{FUNCTION}({ARGS})')
 ctx.rule(u'STATEMENT',u'{VAR} = {CLASS}->{FUNCTION}({ARGS})')

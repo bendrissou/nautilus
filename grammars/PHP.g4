@@ -1,7 +1,7 @@
 grammar PHP;
 
 start
-    : '<?php' top_statement_list '?>'
+    : '<?php' top_statement_list '?>' EOF
     ;
 
 reserved_non_modifiers
@@ -843,7 +843,6 @@ encaps_var
     : t_variable
     | t_variable '[' encaps_var_offset ']'
     | t_variable '->' t_string
-    | '$' '{' expr '}'
     | '{' '$' variable '}'
     ;
 
@@ -909,6 +908,7 @@ t_NS_separator
 t_string
     : T_STRING
     | letter
+    | semi_reserved
     ;
 
 T_STRING

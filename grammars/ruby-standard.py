@@ -109,7 +109,7 @@ ctx.rule(u'MRHS', u'* {ARG}')
 
 ctx.rule(u'CALL_ARGS', u'{ARGS}')
 ctx.rule(u'CALL_ARGS', u'{ARGS}{ASSOCS_OPT}{ARG_AST_OPT}{ARG_AMP_OPT}')
-ctx.rule(u'CALL_ARGS', u'ASSOCS{ARG_AST_OPT}{ARG_AMP_OPT}')
+ctx.rule(u'CALL_ARGS', u'{ASSOCS}{ARG_AST_OPT}{ARG_AMP_OPT}')
 ctx.rule(u'CALL_ARGS', u'*{ARG}{ARG_AMP_OPT}')
 ctx.rule(u'CALL_ARGS', u'&{ARG}')
 ctx.rule(u'CALL_ARGS', u'{COMMAND}')

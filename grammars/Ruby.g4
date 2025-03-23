@@ -161,7 +161,7 @@ mrhs
 call_args
     : args
     | args assocs_opt arg_ast_opt arg_amp_opt
-    | 'assocs' arg_ast_opt arg_amp_opt
+    | assocs arg_ast_opt arg_amp_opt
     | '*' arg arg_amp_opt
     | '&' arg
     | command
@@ -207,9 +207,9 @@ variable
 literal
     : numeric
     | symbol
-    | string
-    | string2
-    | here_doc
+    | STRING
+    | STRING2
+    | HERE_DOC
     | REGEXP
     ;
 
@@ -432,158 +432,38 @@ operation
     ;
 
 global
-    : '$' identifier
-    | '$' any_char
-    | '$' '-' any_char
-    | '$'
+    : GLOBAL
     ;
 
-string
-    : '"' str_1 '"'
-    | '\'' str_2 '\''
-    | '`' str_3 '`'
+STRING
+    : '"' ('\\"' | [\u0000-\u0021\u0023-\u007F])* '"'
+    | '\'' ('\\\'' | [\u0000-\u0026\u0028-\u007F])* '\''
+    | '`' ('\\`' | [\u0000-\u005F\u0061-\u007F])* '`'
     ;
 
-str_1
-    : /* empty */
-    | str_1 str_1_char
+STRING2
+    : '%' [Qqx] '{' ('\\{' | '\\}' | [\u0000-\u007A\u007C\u007E-\u007F])* '}'
+    | '%' [Qqx] '[' ('\\[' | '\\]' | [\u0000-\u005A\u005C\u005E-\u007F])* ']'
+    | '%' [Qqx] '(' ('\\(' | '\\)' | [\u0000-\u0027\u002A-\u007F])* ')'
     ;
 
-str_2
-    : /* empty */
-    | str_2 str_2_char
-    ;
-
-str_3
-    : /* empty */
-    | str_3 str_3_char
-    ;
-
-str_1_char
-    : char
-    | bracket
-    | '/'
-    | '\\' '"'
-    | '\''
-    | '`'
-    ;
-
-str_2_char
-    : char
-    | bracket
-    | '/'
-    | '"'
-    | '\\' '\''
-    | '`'
-    ;
-
-str_3_char
-    : char
-    | bracket
-    | '/'
-    | '"'
-    | '\''
-    | '\\' '`'
-    ;
-
-string2
-    : string2_prefix '{' string2_1 '}'
-    | string2_prefix '[' string2_2 ']'
-    | string2_prefix '(' string2_3 ')'
-    ;
-
-string2_prefix
-    : '%' 'Q'
-    | '%' 'q'
-    | '%' 'x'
-    ;
-
-here_doc
-    : '<<EOF' any_string 'EOF'
+HERE_DOC
+    : '<<EOF\n' [\u0000-\u007F]*? '\nEOF'
     ;
 
 REGEXP
-    : '/' ('\\/'|[\u0000-\u007F && ~[/]])* '/' [iop]
-    | '%' 'r' '{' ('\\{' | '\\}' | [\u0000-\u007F] ~('{' | '}'))* '}'
-    | '%' 'r' '[' ('\\[' | '\\]' | [\u0000-\u007F] ~('[' | ']'))* ']'
-    ;
-
-regexp_str_1
-    : /* empty */
-    | regexp_str_1 regexp_str_1_char
-    ;
-
-regexp_str_1_char
-    : char
-    | bracket
-    | quote
-    | '\\' '/'
-    ;
-
-string2_1
-    : string2_1 string2_1_char
-    | /* empty */
-    ;
-
-string2_2
-    : string2_2 string2_2_char
-    | /* empty */
-    ;
-
-string2_3
-    : string2_3 string2_3_char
-    | /* empty */
-    ;
-
-string2_1_char
-    : char
-    | quote
-    | '/'
-    | '\\' '{'
-    | '\\' '}'
-    | '('
-    | ')'
-    | '['
-    | ']'
-    ;
-
-string2_2_char
-    : char
-    | quote
-    | '/'
-    | '{'
-    | '}'
-    | '('
-    | ')'
-    | '\\' '['
-    | '\\' ']'
-    ;
-
-string2_3_char
-    : char
-    | quote
-    | '/'
-    | '{'
-    | '}'
-    | '\\' '('
-    | '\\' ')'
-    | '['
-    | ']'
-    ;
-
-any_string
-    : any_char any_string
-    | /* empty */
+    : '/' ('\\/'|[\u0000-\u002E\u0030-\u007F])* '/' [iop]
+    | '%' 'r' '{' ('\\{' | '\\}' | [\u0000-\u007A\u007C\u007E-\u007F])* '}'
+    | '%' 'r' '[' ('\\[' | '\\]' | [\u0000-\u005A\u005C\u005E-\u007F])* ']'
     ;
 
 identifier
-    : letter ext_string
+    : letter
+    | IDENTIFIER
     ;
 
-ext_string
-    : /* empty */
-    | ext_string letter
-    | ext_string decimaldigit
+IDENTIFIER
+    : [a-zA-Z_][a-zA-Z0-9_]*
     ;
 
 numeric
@@ -592,73 +472,26 @@ numeric
     ;
 
 hex
-    : hex_prefix hex_seq hex_float_seq hex_float_exp
+    : hexd
+    | HEX
     ;
 
-hex_prefix
-    : '0' 'x'
-    | '0' 'X'
+HEX
+    : '0' [xX] [0-9a-fA-F]+ ('.' [0-9a-fA-F]+)? ([pP] '-'? [0-9a-fA-F]+)?
     ;
 
-hex_seq
-    : hexd hex_seq
-    | hexd
-    ;
-
-hex_float_seq
-    : '.' hex_seq
-    | /* empty */
-    ;
-
-hex_float_exp
-    : hex_float_exp_prefix hex_seq
-    | /* empty */
-    ;
-
-hex_float_exp_prefix
-    : 'p'
-    | 'p' '-'
-    | 'P'
-    | 'P' '-'
-    ;
-
-any_char
-    : char
-    | bracket
-    | quote
-    | '/'
+GLOBAL
+    : '$' '-'? [\u0000-\u007F]
+    | '$' IDENTIFIER
     ;
 
 decimal
-    : dec_prefix dec_seq dec_float_seq dec_float_exp
+    : decimaldigit
+    | DECIMAL
     ;
 
-dec_prefix
-    : '-'
-    | '+'
-    | /* empty */
-    ;
-
-dec_seq
-    : decimaldigit dec_seq
-    | decimaldigit
-    ;
-
-dec_float_seq
-    : '.' dec_seq
-    | /* empty */
-    ;
-
-dec_float_exp
-    : dec_float_exp_prefix dec_seq
-    | /* empty */
-    ;
-
-dec_float_exp_prefix
-    : 'e'
-    | 'e' '-'
-    | 'E'
-    | 'E' '-'
+DECIMAL
+    : [+\-]? [0-9]+ ('.' [0-9]+)? ([eE] '-'? [0-9]+)?
     ;
 
 decimaldigit
@@ -762,129 +595,6 @@ bracket
     | ']'
     | '{'
     | '}'
-    ;
-
-quote
-    : '"'
-    | '\''
-    | '`'
-    ;
-
-char
-    : '\u0000'
-    | '\u0001'
-    | '\u0002'
-    | '\u0003'
-    | '\u0004'
-    | '\u0005'
-    | '\u0006'
-    | '\u0007'
-    | '\b'
-    | '\u000b'
-    | '\f'
-    | '\u000e'
-    | '\u000f'
-    | '\u0010'
-    | '\u0011'
-    | '\u0012'
-    | '\u0013'
-    | '\u0014'
-    | '\u0015'
-    | '\u0016'
-    | '\u0017'
-    | '\u0018'
-    | '\u0019'
-    | '\u001a'
-    | '\u001b'
-    | '\u001c'
-    | '\u001d'
-    | '\u001e'
-    | '\u001f'
-    | '!'
-    | '#'
-    | '$'
-    | '%'
-    | '&'
-    | '*'
-    | '+'
-    | ','
-    | '-'
-    | '.'
-    | '0'
-    | '1'
-    | '2'
-    | '3'
-    | '4'
-    | '5'
-    | '6'
-    | '7'
-    | '8'
-    | '9'
-    | ':'
-    | ';'
-    | '<'
-    | '='
-    | '>'
-    | '?'
-    | '@'
-    | 'A'
-    | 'B'
-    | 'C'
-    | 'D'
-    | 'E'
-    | 'F'
-    | 'G'
-    | 'H'
-    | 'I'
-    | 'J'
-    | 'K'
-    | 'L'
-    | 'M'
-    | 'N'
-    | 'O'
-    | 'P'
-    | 'Q'
-    | 'R'
-    | 'S'
-    | 'T'
-    | 'U'
-    | 'V'
-    | 'W'
-    | 'X'
-    | 'Y'
-    | 'Z'
-    | '\\'
-    | '^'
-    | '_'
-    | 'a'
-    | 'b'
-    | 'c'
-    | 'd'
-    | 'e'
-    | 'f'
-    | 'g'
-    | 'h'
-    | 'i'
-    | 'j'
-    | 'k'
-    | 'l'
-    | 'm'
-    | 'n'
-    | 'o'
-    | 'p'
-    | 'q'
-    | 'r'
-    | 's'
-    | 't'
-    | 'u'
-    | 'v'
-    | 'w'
-    | 'x'
-    | 'y'
-    | 'z'
-    | '|'
-    | '~'
-    | '\u007f'
     ;
 
 WHITESPACE

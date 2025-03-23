@@ -626,7 +626,7 @@ expr
     | '(object)' expr
     | '(bool)' expr
     | '(unset)' expr
-    | '(exit)' exit_expr
+    | 'exit' exit_expr
     | '@' expr
     | scalar
     | '`' backticks_expr '`'
@@ -726,6 +726,7 @@ variable_class_name
 
 dereferencable
     : dereferencable '->' property_name
+    | simple_variable
     | '(' expr ')'
     | dereferencable_scalar
     ;

@@ -1,4 +1,4 @@
-grammar Ruby;
+grammar ruby;
 
 start
     : program EOF

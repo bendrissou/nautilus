@@ -1,4 +1,4 @@
-grammar PHP;
+grammar php;
 
 start
     : '<?php' top_statement_list '?>' EOF
@@ -634,7 +634,7 @@ expr
     | 'yield'
     | 'yield' expr
     | 'yield' expr '=' '>' expr
-    | 'yield' 'from' expr
+    | 'yield from' expr
     | 'function' returns_ref '(' parameter_list ')' lexical_vars return_type '{' inner_statement_list '}'
     | 'static' 'function' returns_ref '(' parameter_list ')' lexical_vars return_type '{' inner_statement_list '}'
     ;
@@ -727,6 +727,9 @@ variable_class_name
 dereferencable
     : dereferencable '->' property_name
     | simple_variable
+    | dereferencable '[' optional_expr ']'
+    | dereferencable '{' expr '}'
+    | name argument_list
     | '(' expr ')'
     | dereferencable_scalar
     ;

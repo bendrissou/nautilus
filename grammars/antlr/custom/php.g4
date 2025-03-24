@@ -42,7 +42,7 @@ val
     | '1'
     | '0'
     | '0.0'
-    | 'null'
+    | 'NULL'
     | 'true'
     | 'false'
     | 'range(' val ',' val ')'

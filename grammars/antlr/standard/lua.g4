@@ -1,4 +1,4 @@
-grammar Lua;
+grammar lua;
 
 start
     : program

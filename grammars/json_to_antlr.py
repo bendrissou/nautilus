@@ -110,8 +110,8 @@ def convert_grammar_files(json_input_file, antlr_output_file):
         file.write(antlr_grammar)
 
 # Example usage
-json_input_file = 'lua.json'  # Path to the input JSON file
-antlr_output_file = 'Lua.g4'  # Path to the output ANTLR file
+json_input_file = 'ruby-custom.json'  # Path to the input JSON file
+antlr_output_file = 'ruby.g4'  # Path to the output ANTLR file
 
 convert_grammar_files(json_input_file, antlr_output_file)
 

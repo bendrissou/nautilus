@@ -1,7 +1,7 @@
 grammar ruby;
 
 start
-    : 'a=0\nb="asdfasdfasdf adaf asdf asdfa sdf asdfasdfasdfa sdf"\nc={1=>1, 2=>"foo", "foo"=>nil, nil=> nil}\nd=[1,nil," sdfg"]\nsrand(1337)\n' program
+    : 'a' '=' '0' 'b' '=' '"' 'asdf' 'asdf' 'asdf' ' adaf ' 'asdf asdf' 'a sdf ' 'asdf' 'asdf' 'asdf' 'a sdf' '"' 'c' '=' '{' '1' '=>' '1' ',' '2' '=>' '"' 'foo' '"' ',' '"' 'foo' '"' '=>' 'nil' ',' 'nil' '=>' 'nil' '}' 'd' '=' '[' '1' ',' 'nil' ',' '"' ' sdfg' '"' ']' 'srand' '(' '1337' ')' program
     ;
 
 program
@@ -36,19 +36,19 @@ args
     ;
 
 val
-    : '"foo"'
-    | '"foobadsfdsfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfd"'
+    : '"' 'foo' '"'
+    | '"' 'foo' 'badsfdsf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asfd' '"'
     | '1'
     | '0'
-    | '0.0'
+    | '0' '.' '0'
     | 'nil'
     | 'true'
     | 'false'
     | '/foo/'
     | '(' val '..' val ')'
-    | '[]'
-    | '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,nil]'
-    | '{}'
+    | '[' ']'
+    | '[' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' 'nil' ']'
+    | '{' '}'
     ;
 
 identifier

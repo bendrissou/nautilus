@@ -1,7 +1,7 @@
 grammar php;
 
 start
-    : '<?php\n$a = NULL;\n$b = NULL;\n$c = NULL;\n$d = NULL;\nsrand(1337);\n' program '?>'
+    : '<?php' '$a' '=' 'NULL' ';' '$b' '=' 'NULL' ';' '$c' '=' 'NULL' ';' '$d' '=' 'NULL' ';' 'srand' '(' '1337' ')' ';' program '?>'
     ;
 
 program
@@ -37,17 +37,17 @@ args
     ;
 
 val
-    : '"foo"'
-    | '"foobadsfdsfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfd"'
+    : '"' 'foo' '"'
+    | '"' 'foo' 'badsfdsf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asdf' 'asfd' '"'
     | '1'
     | '0'
-    | '0.0'
+    | '0' '.' '0'
     | 'NULL'
     | 'true'
     | 'false'
     | 'range' '(' val ',' val ')'
-    | '[]'
-    | '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]'
+    | '[' ']'
+    | '[' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ',' '0' ']'
     ;
 
 class

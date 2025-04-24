@@ -121,8 +121,8 @@ ctx.rule(u'MEMBER_EXPRESSION',u'{PRIMARY_EXPRESSION}({ARGUMENT_LIST_OPT})')
 ctx.rule(u'ARGUMENT_LIST_OPT',u'')
 ctx.rule(u'ARGUMENT_LIST_OPT',u'{ARGUMENT_LIST}')
 
-ctx.rule(u'ARGUMENT_LIST',u'{ARGUMENT_EXPRESSION}')
-ctx.rule(u'ARGUMENT_LIST',u'{ARGUMENT_EXPRESSION}, {ARGUMENT_LIST}')
+ctx.rule(u'ARGUMENT_LIST',u'{ASSIGNMENT_EXPRESSION}')
+ctx.rule(u'ARGUMENT_LIST',u'{ASSIGNMENT_EXPRESSION}, {ARGUMENT_LIST}')
 
 ctx.rule(u'IDENTIFIER',u'[a-zA-Z_]([0-9]|[a-zA-Z_])*')
 
@@ -229,6 +229,8 @@ ctx.rule(u'STR_2_CHAR',u'{CHAR}')
 ctx.rule(u'STR_2_CHAR',u'{T_NS_SEPARATOR}{CHAR} ')
 ctx.rule(u'STR_2_CHAR',u'"')
 ctx.rule(u'STR_2_CHAR',u'\\\'')
+
+ctx.rule(u'T_NS_SEPARATOR',u'\\')
 
 # All chars, except three: ' " \
 ctx.rule(u'CHAR', u'\x00')

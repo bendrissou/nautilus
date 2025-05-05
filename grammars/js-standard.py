@@ -124,7 +124,7 @@ ctx.rule(u'ARGUMENT_LIST_OPT',u'{ARGUMENT_LIST}')
 ctx.rule(u'ARGUMENT_LIST',u'{ASSIGNMENT_EXPRESSION}')
 ctx.rule(u'ARGUMENT_LIST',u'{ASSIGNMENT_EXPRESSION}, {ARGUMENT_LIST}')
 
-ctx.rule(u'IDENTIFIER',u'[a-zA-Z_]([0-9]|[a-zA-Z_])*')
+ctx.regex(u'IDENTIFIER',u'[a-zA-Z_]([0-9]|[a-zA-Z_])*')
 
 ctx.rule(u'UNARY_OPERATOR',u'+')
 ctx.rule(u'UNARY_OPERATOR',u'-')
@@ -208,7 +208,7 @@ ctx.rule(u'MULTIPLICATIVE_OPERATOR',u'%')
 
 ### Lexer
 
-ctx.rule(u'VALUE_INTEGER',u'[0-9]+')
+ctx.regex(u'VALUE_INTEGER',u'[0-9]+')
 ctx.rule(u'VALUE_DOUBLE',u'{VALUE_INTEGER}.{VALUE_INTEGER}')
 
 ctx.rule(u'VALUE_STRING',u'"{STR_1}"')

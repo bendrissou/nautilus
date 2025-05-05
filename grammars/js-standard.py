@@ -13,8 +13,9 @@ ctx.rule(u'PARAMETER_LIST',u'{IDENTIFIER}')
 ctx.rule(u'PARAMETER_LIST',u'{IDENTIFIER}, {PARAMETER_LIST}')
 
 ctx.rule(u'COMPOUND_STATEMENT',u'\\{{STATEMENTS}\\}')
+ctx.rule(u'COMPOUND_STATEMENT',u'\\{;\\}')
 
-ctx.rule(u'STATEMENTS',u'')
+ctx.rule(u'STATEMENTS',u'{STATEMENT}\n')
 ctx.rule(u'STATEMENTS',u'{STATEMENT}\n{STATEMENTS}')
 
 ctx.rule(u'STATEMENT',u';')
